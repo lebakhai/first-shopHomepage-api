@@ -12,4 +12,18 @@ body {
     align-items: center;
     flex-wrap: wrap;
     gap: 24px;
+    background-color: #F5F5F5;
+    
+}
+
+@media (max-width: 1023px) and (min-width: 768px) {
+    #content {
+    grid-template-columns: repeat(3, 1fr) !important;
+    }
+}
+
+@media (max-width: 767px){
+    #content {
+    grid-template-columns: repeat(1, 1fr) !important;
+    }
 }

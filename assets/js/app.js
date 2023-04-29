@@ -1,27 +1,40 @@
-var inputContentText;
-var inputContentCB;
-var inputContentSelect;
-var inputCBElement = document.querySelector('#inputCB');
-var inputTextElement = document.querySelector('#inputTXT');
-var selectBox = document.querySelector('#selectBox');
-inputCBElement.style.cssText = "transform: scale(2)";
-selectBox.style.cssText = "padding: 12px; border: #ccc solid 2px; background-color: transparent; border-radius: 12px;";
+var contentBox = document.querySelector('#content');
+var apiLink = 'https://dummyjson.com/products';
 
-// inputTextElement.oninput = function(e) {
-//     inputContentText = e.target.value;
-//     console.log(inputContentText);
-// };
+fetch(apiLink)
+.then(function(apiContent) {
+    return apiContent.json();
+})
+.then(function(products) {
+    var productsArr = products.products
+    loadItem(productsArr)
+})
 
-inputTextElement.onkeyup = function(e) {
-    console.log(e.which);
-};
+function loadItem(arr) {
+    var htmls = arr.map(function(item, index) {
+        var title = item.title;
+        var brand = item.brand;
+        var dsc = item.description;
+        var price = item.price;
+        var category = item.category;
+        var discount = item.discountPercentage;
+        var img = item.thumbnail;
+        return `<div class="product">
+        <div class="product-item discount">-${discount}%</div>
+        <div class="product-img"><img class="img" src="${img}"></div>
+        <div class="product-content">
+        <div class="product-item title">${title}</div>
+        <div class="product-item brand">${brand}</div>
+        <div class="product-item category">${category}</div>
+        <div class="product-item dsc">${dsc}</div>
+        </div>
+        <div class="product-footer">
+        <div class="product-item price">$${price}</div>
+        <div class="product-item btn">Buy</div>
+        </div>
+        </div>`
+    })
 
-inputCBElement.onchange = function(e) {
-    inputContentCB = e.target.checked;
-    console.log(inputContentCB);
-};
-
-selectBox.onchange = function(e) {
-    inputContentSelect = e.target.value;
-    console.log(inputContentSelect);
-};
+    html = htmls.join(' ')
+    contentBox.innerHTML = html;    
+}
