@@ -1,5 +1,10 @@
-var contentBox = document.querySelector('#content');
+var contentBox = document.querySelector('#main-content');
+var imgViewerElement = document.querySelector('.image-viewer');
+var overlayElement = document.querySelector('.overlay')
+var imgProduct = document.getElementsByClassName('img');
 var apiLink = 'https://dummyjson.com/products';
+var imageProduct = '';
+var closeBtn = document.getElementById('close')
 
 fetch(apiLink)
 .then(function(apiContent) {
@@ -7,7 +12,7 @@ fetch(apiLink)
 })
 .then(function(products) {
     var productsArr = products.products
-    loadItem(productsArr)
+    loadItem(productsArr);
 })
 
 function loadItem(arr) {
@@ -33,8 +38,29 @@ function loadItem(arr) {
         <div class="product-item btn">Buy</div>
         </div>
         </div>`
+
+
     })
 
     html = htmls.join(' ')
-    contentBox.innerHTML = html;    
+    contentBox.innerHTML = html;   
+
+    arr.forEach(function(item, index) {
+        var img = item.thumbnail;
+        imgProduct[index].onclick = function(e) {
+            imgViewerElement.classList.add('show');
+            overlayElement.innerHTML = `<img src="${img}">`
+        }
+    })
+    
+    closeBtn.onclick = function(e) {
+        imgViewerElement.classList.remove('show');
+    }
+
+    document.onkeyup = function(e) {
+        if (e.which == 27) {
+            imgViewerElement.classList.remove('show');
+        }
+    }
 }
+

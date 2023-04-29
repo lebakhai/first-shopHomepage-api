@@ -3,27 +3,39 @@
     padding: 0;
     margin: 0;
     font-family: "FiraCode Nerd Font";
+    transition: 0.2s;
 }
 
-body {
+#content {
     min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 24px;
-    background-color: #F5F5F5;
-    
+    min-width: 100vw;
+    background-color: #F5F5F5;    
+}
+
+.show {
+    display: unset !important;
 }
 
 @media (max-width: 1023px) and (min-width: 768px) {
-    #content {
+    #main-content {
     grid-template-columns: repeat(3, 1fr) !important;
     }
 }
 
 @media (max-width: 767px){
-    #content {
+    #main-content {
     grid-template-columns: repeat(1, 1fr) !important;
+    }
+    .overlay>img {
+        margin: 12px;
+    }
+}
+
+@keyframes popup {
+    0% {
+        transform: translateY(-100vh);
+    }
+    100% {
+        transform: translateY(0);
     }
 }
