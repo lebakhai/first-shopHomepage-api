@@ -2,7 +2,7 @@ var contentBox = document.querySelector('#main-content');
 var imgViewerElement = document.querySelector('.image-viewer');
 var overlayElement = document.querySelector('.overlay')
 var imgProduct = document.getElementsByClassName('img');
-var apiLink = 'http://localhost:3000/products';
+var apiLink = 'https://api.jsonbin.io/v3/b/644e56719d312622a354e9ad';
 var imageProduct = '';
 var closeBtn = document.getElementById('close')
 
