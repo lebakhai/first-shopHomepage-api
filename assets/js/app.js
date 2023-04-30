@@ -55,8 +55,7 @@ function deleteProduct(id) {
 }
 
 function loadItem(productsArr) {
-    console.log(productsArr);
-    var htmls = productsArr.record.map(function(item, index) {
+    var htmls = productsArr.record.products.map(function(item, index) {
         var title = item.title;
         var brand = item.brand;
         var dsc = item.description;
