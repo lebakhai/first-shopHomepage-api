@@ -1,0 +1,50 @@
+body {
+    background-color: #3C486B;
+}
+
+.method {
+    margin: 12px;
+    background-color: #F45050;
+    padding: 36px;
+    border-radius: 12px;
+    color: #F0F0F0;
+}
+
+.method .header {
+    text-align: center  ;
+}
+
+.form {
+    margin: 36px;
+    display: block;
+}
+
+.form label {
+    vertical-align: middle;
+}
+
+.form input {
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    float: right;
+    vertical-align: middle;
+    background-color: #F0F0F0;
+}
+
+.method .btn-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.method .btn {
+    background-color: #F9D949;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12px;
+    border-radius: 12px;
+    user-select: none;
+    cursor: pointer;
+}

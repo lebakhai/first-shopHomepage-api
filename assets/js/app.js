@@ -2,21 +2,60 @@ var contentBox = document.querySelector('#main-content');
 var imgViewerElement = document.querySelector('.image-viewer');
 var overlayElement = document.querySelector('.overlay')
 var imgProduct = document.getElementsByClassName('img');
-var apiLink = 'https://dummyjson.com/products';
+var apiLink = 'http://localhost:3000/products';
 var imageProduct = '';
 var closeBtn = document.getElementById('close')
 
-fetch(apiLink)
-.then(function(apiContent) {
-    return apiContent.json();
-})
-.then(function(products) {
-    var productsArr = products.products
-    loadItem(productsArr);
-})
+function start() {
+    getProduct(loadItem)
+}
 
-function loadItem(arr) {
-    var htmls = arr.map(function(item, index) {
+
+function getProduct(callback) {
+    fetch(apiLink)
+    .then(function(apiContent) {
+        return apiContent.json();
+    })
+    .then(callback);
+};
+
+function createProduct(data, callback) {
+    var options = {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+            "Content-Type": "application/json",
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+          },
+    }
+    fetch(apiLink, options)
+    .then(function(response) {
+        response.json();
+    })
+    .then(callback)
+}
+
+
+function deleteProduct(id) {
+    var options = {
+        method: 'Delete',
+        headers: {
+            "Content-Type": "application/json",
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+          },
+    }
+    fetch(apiLink + '/' + id, options)
+    .then(function(response) {
+        response.json();
+    })
+    .then(function() {
+        var productWillDelete = document.querySelector(`.product.${id}`);
+        productWillDelete.remove();
+    })
+}
+
+function loadItem(productsArr) {
+    var htmls = productsArr.map(function(item, index) {
         var title = item.title;
         var brand = item.brand;
         var dsc = item.description;
@@ -24,7 +63,8 @@ function loadItem(arr) {
         var category = item.category;
         var discount = item.discountPercentage;
         var img = item.thumbnail;
-        return `<div class="product">
+        var id = item.id;
+        return `<div class="product ${id}">
         <div class="product-item discount">-${discount}%</div>
         <div class="product-img"><img class="img" src="${img}"></div>
         <div class="product-content">
@@ -45,7 +85,7 @@ function loadItem(arr) {
     html = htmls.join(' ')
     contentBox.innerHTML = html;   
 
-    arr.forEach(function(item, index) {
+    productsArr.forEach(function(item, index) {
         var img = item.thumbnail;
         imgProduct[index].onclick = function(e) {
             imgViewerElement.classList.add('show');
@@ -57,6 +97,10 @@ function loadItem(arr) {
         imgViewerElement.classList.remove('show');
     }
 
+    overlayElement.onclick = function(e) {
+        imgViewerElement.classList.remove('show');
+    }
+
     document.onkeyup = function(e) {
         if (e.which == 27) {
             imgViewerElement.classList.remove('show');
@@ -64,3 +108,34 @@ function loadItem(arr) {
     }
 }
 
+function handleForm() {
+    btnSubmitButton.onclick = function(e) {
+        // e.PreventDefault();
+        var name = document.querySelector('input[name="name"]').value;
+        var price = document.querySelector('input[name="price"]').value;
+        var dsc = document.querySelector('input[name="dsc"]').value;
+        var discount = document.querySelector('input[name="discount"]').value;
+        var brand = document.querySelector('input[name="brand"]').value;
+        var category = document.querySelector('input[name="category"]').value;
+        var imgLink = document.querySelector('input[name="img-link"]').value;
+        var formData = {
+            title: name,
+            price: price,
+            description: dsc,
+            discountPercentage: discount,
+            brand: brand,
+            category: category,
+            thumbnail: imgLink,
+        }
+
+        createProduct(formData, function() {
+            getProduct(loadItem)
+        });
+    }
+
+    btnDeleteButton.onclick = function(e) {
+        // e.PreventDefault();
+        var idDelete = document.querySelector('input[name="delete"]').value
+        deleteProduct(idDelete);
+    }
+}

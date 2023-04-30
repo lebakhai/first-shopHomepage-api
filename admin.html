@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dasboard</title>
+    <link rel="stylesheet" href="./assets/css/base.css">
+    <link rel="stylesheet" href="./assets/css/admin.css">
+</head>
+<body>
+    <div id="add" class="method">
+        <h1 class="header">Add</h1>
+        <div class="name form">
+            <label>Name</label>
+            <input type="text" placeholder="Name" name="name" id="name">
+        </div>
+
+        <div class="price form">
+            <label>Price</label>
+            <input type="number" name="price" placeholder="Price" id="price">
+        </div>
+
+        <div class="dsc form">
+            <label>Description</label>
+            <input type="text" placeholder="Description" name="dsc" id="dsc">
+        </div>
+
+        <div class="discount form">
+            <label>Discount</label>
+            <input type="text" placeholder="Discount" name="discount" id="discount">
+        </div>
+        
+        <div class="category form">
+            <label>Category</label>
+            <input type="text" placeholder="Category" name="category" id="category">
+        </div>
+
+        <div class="brand form">
+            <label>Brand</label>
+            <input type="text" placeholder="Brand" name="brand" id="brand">
+        </div>
+
+        <div class="image-link form">
+            <label>Image link</label>
+            <input type="text" placeholder="Image link" name="img-link" id="img-link">
+        </div>
+
+        <div class="btn-wrap">
+            <div class="btn">Submit</div>
+        </div>
+    </div>
+
+    <div class="method" id="delete">
+        <h1 class="header">Delete</h1>
+        <div class="id form">
+            <label>Id</label>
+            <input type="text" placeholder="Delete ID" name="delete" id="delete">
+        </div>
+        <div class="btn-wrap">
+            <div class="btn">delete</div>
+        </div>
+    </div>
+    <script src="./assets/js/admin.js"></script>
+    <script src="./assets/js/app.js"></script>
+    <script>
+        handleForm()
+    </script>
+</body>
+</html>
