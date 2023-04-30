@@ -85,7 +85,7 @@ function loadItem(productsArr) {
     html = htmls.join(' ')
     contentBox.innerHTML = html;   
 
-    productsArr.forEach(function(item, index) {
+    productsArr.record.products.forEach(function(item, index) {
         var img = item.thumbnail;
         imgProduct[index].onclick = function(e) {
             imgViewerElement.classList.add('show');
